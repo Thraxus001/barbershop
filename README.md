@@ -1,11 +1,20 @@
+  - name: Setup Node (if using Node) 
+    uses: actions/setup-node@v4
+    with:
+      node-version: "18"
 
-  # Modern Barber Shop UI
+  - name: Install dependencies
+    run: npm install
 
-  This is a code bundle for Modern Barber Shop UI. The original project is available at https://www.figma.com/design/mjxxnELZyKvmn1SCTIWWw1/Modern-Barber-Shop-UI.
+  - name: Build site
+    # change this to your project's build command
+    run: npm run build
 
-  ## Running the code
+  - name: Upload Pages artifact
+    uses: actions/upload-pages-artifact@v1
+    with:
+      # set this to the folder your build outputs (e.g., ./build, ./public, ./out)
+      path: ./build
 
-  Run `npm i` to install the dependencies.
-
-  Run `npm run dev` to start the development server.
-  
+  - name: Deploy to GitHub Pages
+    uses: actions/deploy-pages@v1
